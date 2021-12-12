@@ -26,6 +26,7 @@ class CBlock:
     def computeHash(self):
         digest = hashes.Hash(hashes.SHA256(), backend=default_backend())
         digest.update(self.data)
+        digest.update(bytes(str(self.previousHash),'utf-8'))
         hash = digest.finalize()
 
         print(hash)
