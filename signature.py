@@ -28,6 +28,8 @@ def generate_keys():
 
 def sign(message, private_key):
 
+    message = bytes(str(message),'utf-8')
+
     signature = private_key.sign(
         message,
         padding.PSS(
@@ -38,6 +40,8 @@ def sign(message, private_key):
     return signature
 
 def verify(message, signature, public_key):
+
+    message = bytes(str(message),'utf-8')
 
     try:
         verification = public_key.verify(
@@ -67,7 +71,7 @@ if __name__ == '__main__':
     pr,pu = generate_keys()
     pr1,pu1 = generate_keys()
 
-    message = b"this is a secrete message"
+    message = "this is a secrete message"
     sig = sign(message, pr)
     correct = verify(message, sig, pu)
     
